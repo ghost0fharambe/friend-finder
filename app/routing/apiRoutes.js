@@ -10,7 +10,7 @@ router.get('/api/friends', function (req, res) {
 
 router.post('/api/friends', function (req, res) {
     var dataObj = req.body;
-    console.log(dataObj);
+    //console.log(dataObj);
     data.push(dataObj);
 
     res.json(dataObj);
