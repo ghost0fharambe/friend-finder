@@ -4,9 +4,9 @@ var express = require("express");
 var path = require("path");
 var htmlRoutes = require('./app/routing/htmlRoutes');
 var apiRoutes = require('./app/routing/apiRoutes');
-var data = require('./app/data/friends.js');
+//var data = require('./app/data/friends.js');
 
-console.log(data);
+//console.log(data);
 
 // Sets up the Express App
 // =============================================================
@@ -25,5 +25,5 @@ app.use(apiRoutes);
 //Sets Server to listen
 //==========================================================
 app.listen(PORT, function () {
-    console.log("App listening on PORT " + PORT);
+    console.log("Server listening on: http://localhost:" + PORT);
 });
