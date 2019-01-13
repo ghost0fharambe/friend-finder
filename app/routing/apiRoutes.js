@@ -1,10 +1,13 @@
+//Dependencies
+//=========================================================================
 var express = require('express');
 var router = express.Router();
 var data = require('/CodingCamp/MyHomework/friend-finder/app/data/friends.js');
 var match;
 
+//API Routes
+//=========================================================================
 router.get('/api/friends', function (req, res) {
-    //res.send('hello');
     res.json(data);
 });
 
@@ -17,19 +20,25 @@ router.post('/api/friends', function (req, res) {
 
 module.exports = router
 
+//Functions
+//=========================================================================
+
+//Function to loop through arrays of scores
 function loopScores(req) {
+
+    //Empty array to hold total difference
     var totalDArray = []
+
+    //For Looping through data from friends.js and populate totalDArray
     for (var i = 0; i < data.length; i++) {
-        console.log(findDifference(req.body.scores, data[i].scores))
         var diffArrays = findDifference(req.body.scores, data[i].scores)
-        //console.log(diffArrays);
         var totalDifference = diffArrays.reduce(add, 0);
-        console.log(totalDifference);
         totalDArray.push(totalDifference);
     }
     findLowest(totalDArray);
 };
 
+//Function to find the differences between integers in arrays
 function findDifference(a1, a2) {
     var result = [],
         longerLength = a1.length >= a2.length ? a1.length : a2.length;
@@ -45,21 +54,19 @@ function findDifference(a1, a2) {
     return result;
 };
 
+//Add function for reduce method
 function add(a, b) {
     return a + b;
 };
 
+//Function to find the lowest number in array
 function findLowest(arr) {
     var lowestDiff = Math.min(...arr);
-    //console.log(lowestDiff);
-    //return lowestDiff;
     var closeMatchIndex = arr.indexOf(lowestDiff);
-    //console.log(closeMatchIndex);
-    //console.log(data[closeMatchIndex]);
     match = returnMatch(data[closeMatchIndex])
-    console.log(match);
 };
 
+//Function that returns a number
 function returnMatch(match) {
     return match;
 };
