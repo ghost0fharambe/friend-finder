@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var data = require('/CodingCamp/MyHomework/friend-finder/app/data/friends.js');
-
+var match;
 
 router.get('/api/friends', function (req, res) {
     //res.send('hello');
@@ -12,21 +12,23 @@ router.post('/api/friends', function (req, res) {
     loopScores(req);
     var dataObj = req.body;
     data.push(dataObj);
-    res.json(dataObj);
-})
+    res.json(match);
+});
 
 module.exports = router
 
 function loopScores(req) {
-    var diffArrays = []
+    var totalDArray = []
     for (var i = 0; i < data.length; i++) {
         console.log(findDifference(req.body.scores, data[i].scores))
         var diffArrays = findDifference(req.body.scores, data[i].scores)
         //console.log(diffArrays);
         var totalDifference = diffArrays.reduce(add, 0);
         console.log(totalDifference);
+        totalDArray.push(totalDifference);
     }
-}
+    findLowest(totalDArray);
+};
 
 function findDifference(a1, a2) {
     var result = [],
@@ -45,4 +47,19 @@ function findDifference(a1, a2) {
 
 function add(a, b) {
     return a + b;
+};
+
+function findLowest(arr) {
+    var lowestDiff = Math.min(...arr);
+    //console.log(lowestDiff);
+    //return lowestDiff;
+    var closeMatchIndex = arr.indexOf(lowestDiff);
+    //console.log(closeMatchIndex);
+    //console.log(data[closeMatchIndex]);
+    match = returnMatch(data[closeMatchIndex])
+    console.log(match);
+};
+
+function returnMatch(match) {
+    return match;
 };
