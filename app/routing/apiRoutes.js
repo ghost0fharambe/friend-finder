@@ -2,7 +2,8 @@
 //=========================================================================
 var express = require('express');
 var router = express.Router();
-var data = require('/CodingCamp/MyHomework/friend-finder/app/data/friends.js');
+var path = require('path');
+var data = require(path.resolve(__dirname, '../data/friends.js'));
 var match;
 
 //API Routes
