@@ -15,6 +15,8 @@ router.get('/api/friends', function (req, res) {
 router.post('/api/friends', function (req, res) {
     loopScores(req);
     var dataObj = req.body;
+    dataObj.scores = dataObj.scores.map(parseInt);
+    console.log(dataObj);
     data.push(dataObj);
     res.json(match);
 });

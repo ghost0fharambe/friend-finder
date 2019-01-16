@@ -188,7 +188,7 @@
     <script>
         $("#submit").on("click", function (event) {
             event.preventDefault();
-
+            console.log($("#q1").val())
             // Form validation
             function validateForm() {
                 var isValid = true;
@@ -210,6 +210,7 @@
             // If all required fields are filled
             if (validateForm()) {
                 // Create an object for the user"s data
+                console.log("hello"); 
                 var userData = {
                     name: $("#name").val(),
                     photo: $("#photo").val(),
@@ -226,7 +227,7 @@
                         parseInt($("#q10").val())
                     ]
                 };
-
+                console.log(userData)
                 // AJAX post the data to the friends API.
                 $.post("/api/friends", userData, function (data) {
 
@@ -237,7 +238,7 @@
                     // Show the modal with the best match
                     $("#results-modal").modal("toggle");
 
-                });
+                }, 'json');
             } else {
                 alert("Please fill out all fields before submitting!");
             }
